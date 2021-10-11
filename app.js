@@ -131,6 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let total = 0
       const isLeftEdge = (i % width === 0)
       const isRightEdge = (i % width === width -1)
+      const isBottomEdge = (i >= width * (height - 1))
 
       if (squares[i].classList.contains('valid')) {
         // if (i > 0 && !isLeftEdge && squares[i -1].classList.contains('bomb')) total ++
@@ -148,9 +149,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (i > width + 1 && !isLeftEdge && squares[i -1 -width].classList.contains('bomb')) total ++
         // if (i < width*width - 2       && !isRightEdge && squares[i +1].classList.contains('bomb')) total ++
         if (i < width*width - 1       && !isRightEdge && squares[i +1].classList.contains('bomb')) total ++
-        if (i < (width - 1)*width     && !isLeftEdge && squares[i -1 +width].classList.contains('bomb')) total ++
-        if (i < (width - 1)*width - 2 && !isRightEdge && squares[i +1 +width].classList.contains('bomb')) total ++
-        if (i < (width - 1)*width - 1 && squares[i +width].classList.contains('bomb')) total ++
+        if (i < (width - 1)*width     && !isLeftEdge && !isBottomEdge && squares[i -1 +width].classList.contains('bomb')) total ++
+        if (i < (width - 1)*width - 2 && !isRightEdge && !isBottomEdge && squares[i +1 +width].classList.contains('bomb')) total ++
+        if (i < (width - 1)*width - 1 && !isBottomEdge && squares[i +width].classList.contains('bomb')) total ++
         squares[i].setAttribute('data', total)
       }
     }
