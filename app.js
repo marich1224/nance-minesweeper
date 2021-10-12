@@ -63,65 +63,36 @@ document.addEventListener('DOMContentLoaded', () => {
       grid.appendChild(square)
       squares.push(square)
 
-      //normal click
-      square.addEventListener('click', function(e) {
-        click(square)
-      })
+      var clickCount = 0;
+      square.addEventListener("click", function (e) {
+        e.preventDefault();
+        
+        let timer
+        if (!clickCount) {
+          ++clickCount;
 
-      //ctrl and left click
+          if (!square.classList.contains('flag' || 'checked')) {
+            timer = setTimeout(function () {
+                // single click
+                click(square)
+                clickCount = 0;
+            }, 200);
+          }
+
+        } else {
+          // double click (click interval is 200ms or less)
+          clearTimeout(timer)
+          addFlag(square)
+          clickCount = 0;
+        }
+      },  { passive: false }
+      );
+
+      // ctrl and left click
       square.oncontextmenu = function(e) {
         e.preventDefault()
         addFlag(square)
       }
-
-    //// TODO (marich1224):
-    //// - make the game playable on smartphones
-    //// - change 'flag' key from left-click to long-press
-    //// the following code is based on https://iwb.jp/javascript-event-long-push-mouse-button-tap/ .
-    //
-    //   square.addEventListener(eventStart, e => {
-    //     e.preventDefault();
-    //     // square.classList.add('active');
-    //     result.innerHTML = `${e.clientX}, ${e.clientY} <br> ${e.touches} <br> ${e.touches[0].clientX}, ${e.touches[0].clientY}`
-    //     is_touch = 1;
-    //     square.classList.add('checked');
-    //     timer = setInterval(() => {
-    //       count++;
-    //       // r.textContent = (count / 100) + '秒';
-    //     }, 10);
-    //     if (count == 25) {
-    //       // result.innerHTML = "count!";
-    //       addFlag(square);
-    //       // count = 50;
-    //     }
-    //   })
-       
-    //   square.addEventListener(eventEnd, e => {
-    //     e.preventDefault();
-    //     // result.innerHTML = count;
-    //     is_touch = 0;
-    //     if (count) {
-    //       square.classList.remove('checked');
-    //       clearInterval(timer);
-    //       // r.textContent = (count / 100) + '秒長押しされました';
-    //       count = 0;
-    //     }
-    //   })
-
-    //   square.addEventListener(eventLeave, e => {
-    //     e.preventDefault();
-    //     let el;
-    //     el = isSP ? document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY) : square;
-    //     // if (is_touch == 1) {
-    //       if (!isSP || el !== square) {
-    //         // square.classList.remove('active');
-    //         // square.classList.remove('checked');
-    //         clearInterval(timer);
-    //         // r.textContent = '処理を中断';
-    //         count = 0;
-    //       }
-    //     // }
-    //   })
     }
 
     // TODO (marich1224): extend codes to non-square (rectangle) game board
