@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
     block_height = 40 - 15;
     block_width = 40 - 15;
     if (isGameOver) return
-    if (!square.classList.contains('checked') && (flags < bombAmount)) {
+    if (!square.classList.contains('valid') && (flags < bombAmount)) {
       if (!square.classList.contains('flag')) {
         square.classList.add('flag')
         // square.innerHTML = ' 🚩'
