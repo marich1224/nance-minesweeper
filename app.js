@@ -274,6 +274,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //game over
   function gameOver(square) {
+    if(document.gameConfig.enableSounds.checked) {
+      gameOverSound.play()
+    }
+
     result.innerHTML = 'GAME OVER<BR>(*>△<)<ナーンナーンっっ'
     isGameOver = true
 
