@@ -50,14 +50,18 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // let is_touch = 0;
     // for(let i = 0; i < width*width; i++) {
+
     grid.style.width = "90%";
     grid.style.height = "90%";
+
     for(let i = 0; i < board_size; i++) {
       const square = document.createElement('div')
       square.setAttribute('id', i)
       square.classList.add(shuffledArray[i])
+
       square.style.width = `1.5vw`
       square.style.height = `1.5vw`
+
       if (panda_array[i] == 1) {
         square.classList.add('panda')
       }
@@ -169,7 +173,9 @@ document.addEventListener('DOMContentLoaded', () => {
         square.classList.add('flag')
         // square.innerHTML = ' 🚩'
         // alert(`${valid.style.height}`)
+
         square.innerHTML = `<img src="figs/yellowflag.png" width=100% height=100%>`
+
         flags ++
         flagsLeft.innerHTML = bombAmount - flags
         checkForWin()
