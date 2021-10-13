@@ -1,3 +1,8 @@
+html {
+  /* Disable double tap expansion (for touch device) */
+  touch-action: manipulation;
+}
+
 .container {
   width: 500px;
   align-content: center;
