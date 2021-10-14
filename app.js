@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
       grid.appendChild(square)
       squares.push(square)
 
-      var clickCount = 0;
+      let clickCount = 0;
       square.addEventListener("click", function (e) {
         e.preventDefault();
         
