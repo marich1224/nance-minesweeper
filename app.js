@@ -252,7 +252,6 @@ document.addEventListener('DOMContentLoaded', () => {
       gameOverSound.play()
     }
 
-    result.innerHTML = 'GAME OVER<BR>(*>△<)<ナーンナーンっっ'
     isGameOver = true
 
     //show ALL the bombs
@@ -263,6 +262,9 @@ document.addEventListener('DOMContentLoaded', () => {
         square.classList.add('checked')
       }
     })
+
+    // show gameover modal
+    setTimeout( openGameOverModal(), 1000 );
   }
 
   //check for win
@@ -275,13 +277,47 @@ document.addEventListener('DOMContentLoaded', () => {
         matches ++
       }
       if (matches === bombAmount) {
+        // show gameover modal
+        setTimeout( openGameClearModal(), 1000 );
+
         if(document.gameConfig.enableSounds.checked) {
           gameClearSound.play()
         }
 
-        result.innerHTML = 'YOU WIN!'
         isGameOver = true
       }
     }
+  }
+
+  // modal
+  const gameOverModal = document.getElementById('gameOverModalArea')
+  const gameClearModal = document.getElementById('gameClearModalArea')
+
+  const restartButtons = document.getElementsByName('restart')
+	for(let i = 0; i < restartButtons.length; i++) {
+    restartButtons[i].addEventListener('click', (e) => {
+      createBoard()
+      closeModal()
+    })
+	}
+
+  const closeButtons = document.getElementsByName('closeButton')
+	for(let i = 0; i < closeButtons.length; i++) {
+    closeButtons[i].addEventListener('click', (e) => {
+      closeModal()
+    })
+	}
+
+  function closeModal() {
+    gameOverModal.classList.remove('is-show')
+    gameClearModal.classList.remove('is-show')
+  }
+
+  function openGameOverModal() {
+    gameOverModal.classList.add('is-show')
+  }
+
+  function openGameClearModal() {
+    gameClearModal.classList.add('is-show')
   }
 })
