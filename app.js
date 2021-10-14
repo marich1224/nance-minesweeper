@@ -183,8 +183,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const isLowerEdge = (currentId >= squares.length - width)
 
     setTimeout(() => {
-      if (!isLeftEdge) {
-        const newId = squares[parseInt(currentId) -1].id
+      if (!isUpperEdge && !isLeftEdge) {
+        const newId = squares[parseInt(currentId) -width -1].id
         const newSquare = document.getElementById(newId)
         click(newSquare)
       }
@@ -193,13 +193,33 @@ document.addEventListener('DOMContentLoaded', () => {
         const newSquare = document.getElementById(newId)
         click(newSquare)
       }
+      if (!isUpperEdge && !isRightEdge) {
+        const newId = squares[parseInt(currentId -width +1)].id
+        const newSquare = document.getElementById(newId)
+        click(newSquare)
+      }
+      if (!isLeftEdge) {
+        const newId = squares[parseInt(currentId) -1].id
+        const newSquare = document.getElementById(newId)
+        click(newSquare)
+      }
       if (!isRightEdge) {
         const newId = squares[parseInt(currentId) +1].id
         const newSquare = document.getElementById(newId)
         click(newSquare)
       }
+      if (!isLowerEdge && !isLeftEdge) {
+        const newId = squares[parseInt(currentId) +width -1].id
+        const newSquare = document.getElementById(newId)
+        click(newSquare)
+      }
       if (!isLowerEdge) {
         const newId = squares[parseInt(currentId) +width].id
+        const newSquare = document.getElementById(newId)
+        click(newSquare)
+      }
+      if (!isLowerEdge && !isRightEdge) {
+        const newId = squares[parseInt(currentId) +width +1].id
         const newSquare = document.getElementById(newId)
         click(newSquare)
       }
