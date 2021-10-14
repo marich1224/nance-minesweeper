@@ -10,6 +10,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const eventEnd = isSP ? 'touchend' : 'mouseup';
   const eventLeave = isSP ? 'touchmove' : 'mouseleave';
 
+  // Sounds
+  const gameClearSound = new Audio('sounds/game_clear.mp3');
+  const gameOverSound = new Audio('sounds/game_over.mp3');
+
   ////
   // board_width, board_height, panda are defined in panda.js
   ////
@@ -208,6 +212,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //game over
   function gameOver(square) {
+    if(document.gameConfig.enableSounds.checked) {
+      gameOverSound.play()
+    }
+
     result.innerHTML = 'GAME OVER<BR>(*>△<)<ナーンナーンっっ'
     isGameOver = true
 
@@ -231,6 +239,10 @@ document.addEventListener('DOMContentLoaded', () => {
         matches ++
       }
       if (matches === bombAmount) {
+        if(document.gameConfig.enableSounds.checked) {
+          gameClearSound.play()
+        }
+
         result.innerHTML = 'YOU WIN!'
         isGameOver = true
       }
