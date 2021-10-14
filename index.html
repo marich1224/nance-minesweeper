@@ -9,6 +9,44 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- GAME OVER Modal -->
+  <section id="gameOverModalArea" class="modalArea">
+    <div id="modalBg" class="modalBg"></div>
+    <div class="modalWrapper">
+      <div class="modalContents">
+        <h1>GAME OVER</h1>
+        <p>(*>△<)<ナーンナーンっっ</p>
+        <p><button name="restart" class="restartButton">もう一回遊ぶ</button></p>
+        <p>
+          <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="爆発しちゃったよ！&NewLine;(*>△<)＜ナーンナーンっっ" data-url="https://marich1224.github.io/pages/minesweeper/" data-size="large">Tweet</a>
+        </p>
+      </div>
+      <div name="closeButton" class="closeModal">
+        ×
+      </div>
+    </div>
+  </section>
+  <!-- GAME OVER Modal -->
+
+  <!-- GAME CLEAR Modal -->
+  <section id="gameClearModalArea" class="modalArea">
+    <div id="modalBg" class="modalBg"></div>
+    <div class="modalWrapper">
+      <div class="modalContents">
+        <h1>GAME CLEAR!</h1>
+        <p>(*>△<)<ナーンナーンっっ</p>
+        <p><button name="restart" class="restartButton">もう一回遊ぶ</button></p>
+        <p>
+          <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="ゲームクリアしたよ！&NewLine;(*>△<)＜ナーンナーンっっ" data-url="https://marich1224.github.io/pages/minesweeper/" data-size="large">Tweet</a>
+        </p>
+      </div>
+      <div name="closeButton" class="closeModal">
+        ×
+      </div>
+    </div>
+  </section>
+  <!-- GAME CLEAR Modal -->
+  
   <h1>マインスイーパー ナンス ver. </h1>
   パネル開け: 左クリック または タップ <br>
   フラッグ設置: 右クリック または ダブルタップ
@@ -19,8 +57,8 @@
   <div class="container">
     <div class="grid"></div>
     <div>残りフラッグ数: <span id='flags-left'></span></div>
-    <div id="result"></div>
   </div>
 
 </body>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </html>
