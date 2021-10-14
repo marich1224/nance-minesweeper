@@ -1,8 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const grid = document.querySelector('.grid')
-  const container = document.querySelector('.container')
-  const flagsLeft = document.querySelector('#flags-left')
-  const result = document.querySelector('#result')
+  const initialGrid = document.querySelector('.grid')
+  const initialContainer = document.querySelector('.container')
+  const initialFlagsLeft = document.querySelector('#flags-left')
+  const initialResult = document.querySelector('#result')
+
+  // Game
+  var grid
+  var container
+  var flagsLeft
+  var result
+  var bombAmount
+  var flags
+  var squares
+  var isGameOver
 
   // Sounds
   const gameClearSound = new Audio('sounds/game_clear.mp3');
@@ -17,13 +27,29 @@ document.addEventListener('DOMContentLoaded', () => {
   let panda_array = panda;
   let panda_pts = panda_points;
 
-  let bombAmount = 147
-  let flags = 0
-  let squares = []
-  let isGameOver = false
+  function initProperty() {
+    grid = initialGrid
+    grid.innerHTML = ""
+    container = initialContainer
+    flagsLeft = initialFlagsLeft
+    result = initialResult
+
+    width = board_width;
+    height = board_height;
+    board_size = board_width * board_height;
+    panda_array = panda;
+    panda_pts = panda_points;
+    bombAmount = 147
+    flags = 0
+    squares = []
+    isGameOver = false
+  }
   
   //create Board
-  function createBoard() {
+  function createBoard(isRestart) {
+    
+    initProperty()
+
     flagsLeft.innerHTML = bombAmount
 
     //get shuffled game array with random bombs
