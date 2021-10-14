@@ -4,12 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const flagsLeft = document.querySelector('#flags-left')
   const result = document.querySelector('#result')
 
-  const ua = navigator.userAgent.toLowerCase();
-  const isSP = /iphone|ipod|ipad|android/.test(ua);
-  const eventStart = isSP ? 'touchstart' : 'mousedown';
-  const eventEnd = isSP ? 'touchend' : 'mouseup';
-  const eventLeave = isSP ? 'touchmove' : 'mouseleave';
-
   // Sounds
   const gameClearSound = new Audio('sounds/game_clear.mp3');
   const gameOverSound = new Audio('sounds/game_over.mp3');
@@ -27,11 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let flags = 0
   let squares = []
   let isGameOver = false
-
-  let count = 0;
-  let timer;
-
-
+  
   //create Board
   function createBoard() {
     flagsLeft.innerHTML = bombAmount
