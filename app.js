@@ -10,6 +10,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const eventEnd = isSP ? 'touchend' : 'mouseup';
   const eventLeave = isSP ? 'touchmove' : 'mouseleave';
 
+  // Sounds
+  const gameClearSound = new Audio('sounds/game_clear.mp3');
+  const gameOverSound = new Audio('sounds/game_over.mp3');
+
   ////
   // board_width, board_height, panda are defined in panda.js
   ////
@@ -51,16 +55,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // let is_touch = 0;
     // for(let i = 0; i < width*width; i++) {
 
-    grid.style.width = "90%";
-    grid.style.height = "90%";
-
     for(let i = 0; i < board_size; i++) {
       const square = document.createElement('div')
       square.setAttribute('id', i)
       square.classList.add(shuffledArray[i])
 
-      square.style.width = `1.5vw`
-      square.style.height = `1.5vw`
 
       if (panda_array[i] == 1) {
         square.classList.add('panda')
@@ -68,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
       grid.appendChild(square)
       squares.push(square)
 
-      var clickCount = 0;
+      let clickCount = 0;
       square.addEventListener("click", function (e) {
         e.preventDefault();
         
@@ -133,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
     block_height = 40 - 15;
     block_width = 40 - 15;
     if (isGameOver) return
-    if (!square.classList.contains('checked') && (flags < bombAmount)) {
+    if (!square.classList.contains('checked') && !square.classList.contains('panda') && (flags < bombAmount)) {
       if (!square.classList.contains('flag')) {
         square.classList.add('flag')
         // square.innerHTML = ' 🚩'
@@ -190,8 +189,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const isLowerEdge = (currentId >= squares.length - width)
 
     setTimeout(() => {
-      if (!isLeftEdge) {
-        const newId = squares[parseInt(currentId) -1].id
+      if (!isUpperEdge && !isLeftEdge) {
+        const newId = squares[parseInt(currentId) -width -1].id
         const newSquare = document.getElementById(newId)
         click(newSquare)
       }
@@ -200,8 +199,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const newSquare = document.getElementById(newId)
         click(newSquare)
       }
+      if (!isUpperEdge && !isRightEdge) {
+        const newId = squares[parseInt(currentId -width +1)].id
+        const newSquare = document.getElementById(newId)
+        click(newSquare)
+      }
+      if (!isLeftEdge) {
+        const newId = squares[parseInt(currentId) -1].id
+        const newSquare = document.getElementById(newId)
+        click(newSquare)
+      }
       if (!isRightEdge) {
         const newId = squares[parseInt(currentId) +1].id
+        const newSquare = document.getElementById(newId)
+        click(newSquare)
+      }
+      if (!isLowerEdge && !isLeftEdge) {
+        const newId = squares[parseInt(currentId) +width -1].id
         const newSquare = document.getElementById(newId)
         click(newSquare)
       }
@@ -210,11 +224,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const newSquare = document.getElementById(newId)
         click(newSquare)
       }
+      if (!isLowerEdge && !isRightEdge) {
+        const newId = squares[parseInt(currentId) +width +1].id
+        const newSquare = document.getElementById(newId)
+        click(newSquare)
+      }
     }, 10)
   }
 
   //game over
   function gameOver(square) {
+    if(document.gameConfig.enableSounds.checked) {
+      gameOverSound.play()
+    }
+
     result.innerHTML = 'GAME OVER<BR>(*>△<)<ナーンナーンっっ'
     isGameOver = true
 
@@ -238,6 +261,10 @@ document.addEventListener('DOMContentLoaded', () => {
         matches ++
       }
       if (matches === bombAmount) {
+        if(document.gameConfig.enableSounds.checked) {
+          gameClearSound.play()
+        }
+
         result.innerHTML = 'YOU WIN!'
         isGameOver = true
       }
