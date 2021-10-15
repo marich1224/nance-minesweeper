@@ -268,4 +268,16 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   }
+  
+  //reset board
+  const resetButton = document.getElementById("resetButton");
+  resetButton.addEventListener("click",function(){
+    document.querySelector('.grid').innerHTML='';
+    bombAmount = 147;
+    flags = 0;
+    squares = [];
+    isGameOver = false;
+    result.innerHTML='';
+    createBoard();
+  });
 })
