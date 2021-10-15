@@ -51,16 +51,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // let is_touch = 0;
     // for(let i = 0; i < width*width; i++) {
 
-    grid.style.width = "90%";
-    grid.style.height = "90%";
-
     for(let i = 0; i < board_size; i++) {
       const square = document.createElement('div')
       square.setAttribute('id', i)
       square.classList.add(shuffledArray[i])
 
-      square.style.width = `1.5vw`
-      square.style.height = `1.5vw`
 
       if (panda_array[i] == 1) {
         square.classList.add('panda')

@@ -2,6 +2,7 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Minesweeper</title>
   <link rel="stylesheet" href="style.css"></link>
   <script src="panda.js" charset="utf-8"></script>
@@ -10,12 +11,12 @@
 </head>
 <body>
 
-  <h1 style="text-align: center">マインスイーパー ナンス ver. </h1>
-  <div class="explaination">
-    <label>左クリック: パネル開け</label>
-    <label>右クリック: フラッグ設置</label>
-    <label><b>**スマホには現状非対応です**</b></label>
-  </div>
+  <h1>マインスイーパー ナンス ver. </h1>
+  パネル開け: 左クリック または タップ <br>
+  フラッグ設置: 右クリック または ダブルタップ
+  <form name="gameConfig">
+    <input type="checkbox" name="enableSounds" value="">音声をオンでプレイする
+  </form>
 
   <br>
   <div class="container">
