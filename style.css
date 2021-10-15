@@ -80,3 +80,11 @@ div {
   margin-top: 5px;
   color: #e76346;
 }
+
+.resetButton{
+  font-size:20px;
+  padding:10px;
+  color: #000000;
+  background-color: #ffff00;
+  border-radius:100vh;
+}
