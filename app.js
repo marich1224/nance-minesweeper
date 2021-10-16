@@ -30,7 +30,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let count = 0;
   let timer;
-
+  
+  let elapsedTime=0;
+  function elapsedTime_countup(){
+    document.getElementById("elapsedTime").innerHTML = elapsedTime.toFixed(1) + "秒";
+    elapsedTime += 0.1;
+  }
+  var elapsedTime_timer;
 
   //create Board
   function createBoard() {
@@ -161,6 +167,11 @@ document.addEventListener('DOMContentLoaded', () => {
       if (square.classList.contains('bomb')) {
         gameOver(square)
       } else {
+        if (elapsedTime == 0)
+        {
+          elapsedTime_countup();
+          elapsedTime_timer = setInterval(elapsedTime_countup, 100);
+        }
         let total = square.getAttribute('data')
         if (total != 0) {
           square.classList.add('checked')
@@ -239,6 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     result.innerHTML = 'GAME OVER<BR>(*>△<)<ナーンナーンっっ'
+    clearInterval(elapsedTime_timer);
     isGameOver = true
 
     //show ALL the bombs
@@ -264,7 +276,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if(document.gameConfig.enableSounds.checked) {
           gameClearSound.play()
         }
-
+        clearInterval(elapsedTime_timer);
         result.innerHTML = 'YOU WIN!'
         isGameOver = true
       }
