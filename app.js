@@ -54,20 +54,20 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // let is_touch = 0;
     // for(let i = 0; i < width*width; i++) {
-    grid.style.height = `${height * 40}px`;
-    grid.style.width = `${width * 40}px`;
-    container.style.width = `${width * 40 + 100}px`;
+
     for(let i = 0; i < board_size; i++) {
       const square = document.createElement('div')
       square.setAttribute('id', i)
       square.classList.add(shuffledArray[i])
+
+
       if (panda_array[i] == 1) {
         square.classList.add('panda')
       }
       grid.appendChild(square)
       squares.push(square)
 
-      var clickCount = 0;
+      let clickCount = 0;
       square.addEventListener("click", function (e) {
         e.preventDefault();
         
@@ -137,7 +137,9 @@ document.addEventListener('DOMContentLoaded', () => {
         square.classList.add('flag')
         // square.innerHTML = ' 🚩'
         // alert(`${valid.style.height}`)
-        square.innerHTML = `<img src="figs/yellowflag.png" width=${block_width}px height=${block_height}px>`
+
+        square.innerHTML = `<img src="figs/yellowflag.png" width=100% height=100%>`
+
         flags ++
         flagsLeft.innerHTML = bombAmount - flags
         checkForWin()
