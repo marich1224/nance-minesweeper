@@ -123,18 +123,40 @@ div {
   opacity : 1;
 }
 
-.restartButton {
-  font: 1em sans-serif;
-  padding: 10px;
-  background-color: #fff;
-  border: 1px solid #282828;
-  border-radius: 2px;
-  cursor: pointer;
-}
-
 #openModal {
   position: absolute;
   top: 50%;
   left: 50%;
   transform:translate(-50%,-50%);
+}
+
+/* Button */
+.button {
+  font-size: 0.5em;
+  font-weight: bold;
+  padding: .8em 1.6em;
+  margin: 0.4em;
+  text-decoration: none;
+  border-style: none;
+  border-radius: 5px;
+}
+.button:hover {
+  opacity: 0.6;
+  transition: 1.0s ;
+}
+
+.restartButton {
+  background-color: #fff566;
+  color: #000;
+}
+.tweetButton:hover {
+  color: #000;
+}
+
+.tweetButton {
+  background-color: #00acee;
+  color: #fff;
+}
+.tweetButton:hover {
+  color: #fff;
 }
