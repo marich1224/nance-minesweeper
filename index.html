@@ -2,16 +2,28 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Minesweeper</title>
   <link rel="stylesheet" href="style.css"></link>
+  <script src="panda.js" charset="utf-8"></script>
   <script src="app.js" charset="utf-8"></script>
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
 
+  <h1 style="text-align: center">マインスイーパー ナンス ver. </h1>
+  <div class="explaination">
+    <label>パネル開け: 左クリック または タップ</label>
+    <label>フラッグ設置: 右クリック または ダブルタップ</label>
+  </div>
+  <form name="gameConfig">
+    <input type="checkbox" name="enableSounds" value="">音声をオンでプレイする
+  </form>
+  <br>
   <div class="container">
     <div class="grid"></div>
-    <div>Flags left: <span id='flags-left'></span></div>
+    <div>残りフラッグ数: <span id='flags-left'></span></div>
+    <div>経過時間: <span id='elapsedTime'></span></div>
     <div id="result"></div>
   </div>
 
