@@ -3,8 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>NANCEWEEPER</title>
-  <!-- <meta name="description" content=""> -->
-  <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta property="og:title" content="NANCEWEEPER">
   <meta property="og:url" content="https://marich1224.github.io/pages/minesweeper/">
   <meta property="og:image" content="https://marich1224.github.io/pages/minesweeper/img/og.png">
@@ -17,16 +16,20 @@
 </head>
 
 <body>
-  <h1>マインスイーパー ナンス ver. </h1>
-  パネル開け: 左クリック または タップ <br>
-  フラッグ設置: 右クリック または ダブルタップ
+
+  <h1 style="text-align: center">マインスイーパー ナンス ver. </h1>
+  <div class="explaination">
+    <label>パネル開け: 左クリック または タップ</label>
+    <label>フラッグ設置: 右クリック または ダブルタップ</label>
+  </div>
   <form name="gameConfig">
     <input type="checkbox" name="enableSounds" value="">音声をオンでプレイする
   </form>
-  
+  <br>
   <div class="container">
     <div class="grid"></div>
     <div>残りフラッグ数: <span id='flags-left'></span></div>
+    <div>経過時間: <span id='elapsedTime'></span></div>
     <div id="result"></div>
   </div>
 
