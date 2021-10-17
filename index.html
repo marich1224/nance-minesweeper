@@ -2,6 +2,7 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Minesweeper</title>
   <link rel="stylesheet" href="style.css"></link>
   <script src="panda.js" charset="utf-8"></script>
@@ -46,19 +47,23 @@
     </div>
   </section>
   <!-- GAME CLEAR Modal -->
-  
-  <h1>マインスイーパー ナンス ver. </h1>
-  パネル開け: 左クリック または タップ <br>
-  フラッグ設置: 右クリック または ダブルタップ
-  <form name="gameConfig">
-    <input type="checkbox" name="enableSounds" value="">音声をオンでプレイする / <button name="reset">ゲームリセット</button>
-  </form>
-  
+
+  <h1 style="text-align: center">マインスイーパー ナンス ver. </h1>
+  <div class="explaination">
+    <label>パネル開け: 左クリック または タップ</label>
+    <label>フラッグ設置: 右クリック または ダブルタップ</label>
+    <form name="gameConfig">
+      <input type="checkbox" name="enableSounds" value="">音声をオンでプレイする / <a class="button restartButton" name="restart" href="">ゲームリセット</a>　
+    </form>
+  </div>
+
+  <br>
   <div class="container">
     <div class="grid"></div>
     <div>残りフラッグ数: <span id='flags-left'></span></div>
+    <div>経過時間: <span id='elapsedTime'></span></div>
   </div>
 
 </body>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </html>

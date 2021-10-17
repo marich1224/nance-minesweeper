@@ -2,17 +2,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const initialGrid = document.querySelector('.grid')
   const initialContainer = document.querySelector('.container')
   const initialFlagsLeft = document.querySelector('#flags-left')
-  const initialResult = document.querySelector('#result')
 
   // Game
   var grid
   var container
   var flagsLeft
-  var result
   var bombAmount
   var flags
   var squares
   var isGameOver
+
+  var elapsedTime;
 
   // Sounds
   const gameClearSound = new Audio('sounds/game_clear.mp3');
@@ -32,7 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
     grid.innerHTML = ""
     container = initialContainer
     flagsLeft = initialFlagsLeft
-    result = initialResult
 
     width = board_width;
     height = board_height;
@@ -43,7 +42,15 @@ document.addEventListener('DOMContentLoaded', () => {
     flags = 0
     squares = []
     isGameOver = false
+
+    elapsedTime = 0
   }
+
+  function elapsedTime_countup(){
+    document.getElementById("elapsedTime").innerHTML = elapsedTime.toFixed(1) + "秒";
+    elapsedTime += 0.1;
+  }
+  var elapsedTime_timer;
   
   //create Board
   function createBoard(isRestart) {
@@ -70,20 +77,20 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // let is_touch = 0;
     // for(let i = 0; i < width*width; i++) {
-    grid.style.height = `${height * 40}px`;
-    grid.style.width = `${width * 40}px`;
-    container.style.width = `${width * 40 + 100}px`;
+
     for(let i = 0; i < board_size; i++) {
       const square = document.createElement('div')
       square.setAttribute('id', i)
       square.classList.add(shuffledArray[i])
+
+
       if (panda_array[i] == 1) {
         square.classList.add('panda')
       }
       grid.appendChild(square)
       squares.push(square)
 
-      var clickCount = 0;
+      let clickCount = 0;
       square.addEventListener("click", function (e) {
         e.preventDefault();
         
@@ -148,12 +155,14 @@ document.addEventListener('DOMContentLoaded', () => {
     block_height = 40 - 15;
     block_width = 40 - 15;
     if (isGameOver) return
-    if (!square.classList.contains('checked') && (flags < bombAmount)) {
+    if (!square.classList.contains('checked') && !square.classList.contains('panda') && (flags < bombAmount)) {
       if (!square.classList.contains('flag')) {
         square.classList.add('flag')
         // square.innerHTML = ' 🚩'
         // alert(`${valid.style.height}`)
-        square.innerHTML = `<img src="figs/yellowflag.png" width=${block_width}px height=${block_height}px>`
+
+        square.innerHTML = `<img src="figs/yellowflag.png" width=100% height=100%>`
+
         flags ++
         flagsLeft.innerHTML = bombAmount - flags
         checkForWin()
@@ -175,6 +184,11 @@ document.addEventListener('DOMContentLoaded', () => {
       if (square.classList.contains('bomb')) {
         gameOver(square)
       } else {
+        if (elapsedTime == 0)
+        {
+          elapsedTime_countup();
+          elapsedTime_timer = setInterval(elapsedTime_countup, 100);
+        }
         let total = square.getAttribute('data')
         if (total != 0) {
           square.classList.add('checked')
@@ -253,6 +267,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     isGameOver = true
+    clearInterval(elapsedTime_timer);
 
     //show ALL the bombs
     squares.forEach(square => {
@@ -283,8 +298,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if(document.gameConfig.enableSounds.checked) {
           gameClearSound.play()
         }
-
+        
         isGameOver = true
+        clearInterval(elapsedTime_timer);
       }
     }
   }
