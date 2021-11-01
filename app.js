@@ -1,14 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const grid = document.querySelector('.grid')
-  const container = document.querySelector('.container')
-  const flagsLeft = document.querySelector('#flags-left')
-  const result = document.querySelector('#result')
+  const initialGrid = document.querySelector('.grid')
+  const initialContainer = document.querySelector('.container')
+  const initialFlagsLeft = document.querySelector('#flags-left')
 
-  const ua = navigator.userAgent.toLowerCase();
-  const isSP = /iphone|ipod|ipad|android/.test(ua);
-  const eventStart = isSP ? 'touchstart' : 'mousedown';
-  const eventEnd = isSP ? 'touchend' : 'mouseup';
-  const eventLeave = isSP ? 'touchmove' : 'mouseleave';
+  // Game
+  var grid
+  var container
+  var flagsLeft
+  var bombAmount
+  var flags
+  var squares
+  var isGameOver
+
+  var elapsedTime;
 
   // Sounds
   const gameClearSound = new Audio('sounds/game_clear.mp3');
@@ -23,23 +27,36 @@ document.addEventListener('DOMContentLoaded', () => {
   let panda_array = panda;
   let panda_pts = panda_points;
 
-  let bombAmount = 147
-  let flags = 0
-  let squares = []
-  let isGameOver = false
+  function initProperty() {
+    grid = initialGrid
+    grid.innerHTML = ""
+    container = initialContainer
+    flagsLeft = initialFlagsLeft
 
-  let count = 0;
-  let timer;
-  
-  let elapsedTime=0;
+    width = board_width;
+    height = board_height;
+    board_size = board_width * board_height;
+    panda_array = panda;
+    panda_pts = panda_points;
+    bombAmount = 147
+    flags = 0
+    squares = []
+    isGameOver = false
+
+    elapsedTime = 0
+  }
+
   function elapsedTime_countup(){
     document.getElementById("elapsedTime").innerHTML = elapsedTime.toFixed(1) + "秒";
     elapsedTime += 0.1;
   }
   var elapsedTime_timer;
-
+  
   //create Board
-  function createBoard() {
+  function createBoard(isRestart) {
+    
+    initProperty()
+
     flagsLeft.innerHTML = bombAmount
 
     //get shuffled game array with random bombs
@@ -249,9 +266,8 @@ document.addEventListener('DOMContentLoaded', () => {
       gameOverSound.play()
     }
 
-    result.innerHTML = 'GAME OVER<BR>(*>△<)<ナーンナーンっっ'
-    clearInterval(elapsedTime_timer);
     isGameOver = true
+    clearInterval(elapsedTime_timer);
 
     //show ALL the bombs
     squares.forEach(square => {
@@ -261,6 +277,9 @@ document.addEventListener('DOMContentLoaded', () => {
         square.classList.add('checked')
       }
     })
+
+    // show gameover modal
+    setTimeout( openGameOverModal(), 1000 );
   }
 
   //check for win
@@ -273,13 +292,48 @@ document.addEventListener('DOMContentLoaded', () => {
         matches ++
       }
       if (matches === bombAmount) {
+        // show gameover modal
+        setTimeout( openGameClearModal(), 1000 );
+
         if(document.gameConfig.enableSounds.checked) {
           gameClearSound.play()
         }
-        clearInterval(elapsedTime_timer);
-        result.innerHTML = 'YOU WIN!'
+        
         isGameOver = true
+        clearInterval(elapsedTime_timer);
       }
     }
+  }
+
+  // modal
+  const gameOverModal = document.getElementById('gameOverModalArea')
+  const gameClearModal = document.getElementById('gameClearModalArea')
+
+  const restartButtons = document.getElementsByName('restart')
+	for(let i = 0; i < restartButtons.length; i++) {
+    restartButtons[i].addEventListener('click', (e) => {
+      createBoard()
+      closeModal()
+    })
+	}
+
+  const closeButtons = document.getElementsByName('closeButton')
+	for(let i = 0; i < closeButtons.length; i++) {
+    closeButtons[i].addEventListener('click', (e) => {
+      closeModal()
+    })
+	}
+
+  function closeModal() {
+    gameOverModal.classList.remove('is-show')
+    gameClearModal.classList.remove('is-show')
+  }
+
+  function openGameOverModal() {
+    gameOverModal.classList.add('is-show')
+  }
+
+  function openGameClearModal() {
+    gameClearModal.classList.add('is-show')
   }
 })

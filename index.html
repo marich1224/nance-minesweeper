@@ -10,22 +10,60 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- GAME OVER Modal -->
+  <section id="gameOverModalArea" class="modalArea">
+    <div id="modalBg" class="modalBg"></div>
+    <div class="modalWrapper">
+      <div class="modalContents">
+        <h1>GAME OVER</h1>
+        <p>(*>△<)<ナーンナーンっっ</p>
+        <p>
+          <a class="button restartButton" name="restart" href="">もう一回遊ぶ</a>　
+          <a class="button tweetButton" href="https://twitter.com/intent/tweet?text=爆発しちゃったよ！%0a(*>△<)＜ナーンナーンっっ%0ahttps://marich1224.github.io/pages/minesweeper/" target="_blank" rel="nofollow">結果をツイートする</a>
+        </p>
+      </div>
+      <div name="closeButton" class="closeModal">
+        ×
+      </div>
+    </div>
+  </section>
+  <!-- GAME OVER Modal -->
+
+  <!-- GAME CLEAR Modal -->
+  <section id="gameClearModalArea" class="modalArea">
+    <div id="modalBg" class="modalBg"></div>
+    <div class="modalWrapper">
+      <div class="modalContents">
+        <h1>GAME CLEAR!</h1>
+        <p>(*>△<)<ナーンナーンっっ</p>
+        <p>
+          <a class="button restartButton" name="restart" href="">もう一回遊ぶ</a>　
+          <a class="button tweetButton" href="https://twitter.com/intent/tweet?text=ゲームクリアしたよ！%0a(*>△<)＜ナーンナーンっっ%0ahttps://marich1224.github.io/pages/minesweeper/" target="_blank" rel="nofollow">結果をツイートする</a>
+        </p>
+      </div>
+      <div name="closeButton" class="closeModal">
+        ×
+      </div>
+    </div>
+  </section>
+  <!-- GAME CLEAR Modal -->
 
   <h1 style="text-align: center">マインスイーパー ナンス ver. </h1>
   <div class="explaination">
     <label>パネル開け: 左クリック または タップ</label>
     <label>フラッグ設置: 右クリック または ダブルタップ</label>
+    <form name="gameConfig">
+      <input type="checkbox" name="enableSounds" value="">音声をオンでプレイする / <a class="button restartButton" name="restart" href="">ゲームリセット</a>　
+    </form>
   </div>
-  <form name="gameConfig">
-    <input type="checkbox" name="enableSounds" value="">音声をオンでプレイする
-  </form>
+
   <br>
   <div class="container">
     <div class="grid"></div>
     <div>残りフラッグ数: <span id='flags-left'></span></div>
     <div>経過時間: <span id='elapsedTime'></span></div>
-    <div id="result"></div>
   </div>
 
 </body>
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </html>
