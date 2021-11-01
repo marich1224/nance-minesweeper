@@ -139,62 +139,82 @@ div {
   }
 }
 
-/* @media screen and (max-width: 425px){
-  .container{
-    width: 383.5px;
-    height: 162.5px;
-  }
-
-  .valid, .bomb, .checked, .panda{
-    width: 6.5px;
-    height: 6.5px;
-    border: 0.3px solid;
-    border-color: #f5f3eb #bab7a9 #bab7a9 #fff9db;
-    font-size: 6px;
-  }
-
-  .checked, .panda{
-    border: 0.1px solid;
-    border-color: #bcb9ad;
-  }
+/* modal */
+.modalArea {
+  visibility: hidden;
+  opacity : 0;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: .4s;
 }
 
-@media screen and (max-width: 375px){
-  .container{
-    width: 336.3px;
-    height: 142.5px;
-  }
-
-  .valid, .bomb, .checked, .panda{
-    width: 5.7px;
-    height: 5.7px;
-    border: 0.3px solid;
-    border-color: #f5f3eb #bab7a9 #bab7a9 #fff9db;
-    font-size: 5px;
-  }
-
-  .checked, .panda{
-    border: 0.1px solid;
-    border-color: #bcb9ad;
-  }
+.modalBg {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(30,30,30,0.9);
 }
 
-@media screen and (max-width: 320px){
-  .container{
-    width: 283.2px;
-    height: 120px;
-  }
+.modalWrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform:translate(-50%,-50%);
+  width: 600px;
+  max-width: 70%;
+  padding: 10px 30px;
+  background-color: #fff;
+}
 
-  .valid, .bomb, .checked, .panda{
-    width: 4.8px;
-    height: 4.8px;
-    border: 0.3px solid;
-    border-color: #f5f3eb #bab7a9 #bab7a9 #fff9db;
-    font-size: 4px;
-  }
+.closeModal {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  cursor: pointer;
+}
 
-  .checked, .panda{
-    border: 0.1px solid;
-    border-color: #bcb9ad;
-  }
-} */ 
+.is-show {
+  visibility: visible;
+  opacity : 1;
+}
+
+#openModal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform:translate(-50%,-50%);
+}
+
+/* Button */
+.button {
+  font-size: 0.5em;
+  font-weight: bold;
+  padding: .8em 1.6em;
+  margin: 0.4em;
+  text-decoration: none;
+  border-style: none;
+  border-radius: 5px;
+}
+.button:hover {
+  opacity: 0.6;
+  transition: 1.0s ;
+}
+
+.restartButton {
+  background-color: #b3b3b3;
+  color: #000;
+}
+.tweetButton:hover {
+  color: #000;
+}
+
+.tweetButton {
+  background-color: #00acee;
+  color: #fff;
+}
+.tweetButton:hover {
+  color: #fff;
+}
